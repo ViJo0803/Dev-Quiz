@@ -1,43 +1,53 @@
-import React, { Component } from 'react';
-import {StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import React from "react";
+import { StyleSheet } from "react-native";
 
-export default class Touchables extends Component {
-  _onPressButton() {
-    alert('You tapped the button!')
-  }
+// Navigation
 
-  _onLongPressButton() {
-    alert('You long-pressed the button!')
-  }
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+// Components
+import CalcularVuelta from "./screens/CalcularVuelta";
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>TouchableHighlight</Text>
-          </View>
-        </TouchableHighlight>
-      </View>
-    );
-  }
+const Stack = createNativeStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#621FF7",
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    >
+
+<Stack.Screen
+        name="CalcularVuelta"
+        component={CalcularVuelta}
+        options={{ title: "Calcular vuelta" }}
+      />
+
+    </Stack.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack/>
+    </NavigationContainer>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 60,
-    alignItems: 'center'
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  button: {
-    marginBottom: 30,
-    width: 260,
-    alignItems: 'center',
-    backgroundColor: '#2196F3'
-  },
-  buttonText: {
-    textAlign: 'center',
-    padding: 20,
-    color: 'white'
-  }
 });
